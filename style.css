@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&family=Patrick+Hand&display=swap');
+
+/* layout + background */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  color: #444;
+
+  background: linear-gradient(135deg, #ffd6e0, #d6f0ff, #fdf6c9);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+/* card */
+.card {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  padding: 45px;
+  border-radius: 30px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+  width: 320px;
+}
+
+/* text */
+h1 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 2.6rem;
+  margin-bottom: 10px;
+  color: #ff6f91;
+}
+
+p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+/* buttons */
+button {
+  background: linear-gradient(45deg, #ffc1cc, #ffe4e1);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 28px;
+  margin: 10px;
+  font-size: 15px;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 25px rgba(255, 182, 193, 0.5);
+}
+
+/* surprise section */
+#surprise {
+  margin-top: 20px;
+  animation: fadeIn 1s ease forwards;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.2rem;
+}
+
+#surprise h2 {
+  color: #ff8fab;
+}
+
+.heart {
+  position: fixed;
+  bottom: 0;
+  animation: floatUp 4s linear;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+.heart {
+  font-size: 24px;
+  pointer-events: none;
+  z-index: 9999;
+  position: fixed;
+}
+/* 🎆 confetti */
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 8px;
+  height: 12px;
+  animation: fall 3s linear;
+}
+
+/* animations */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-110vh) scale(1.3); opacity: 0; }
+}
+
+@keyframes sway {
+  from { transform: translateX(0); }
+  to { transform: translateX(20px); }
+}
+
+@keyframes fall {
+  to { transform: translateY(100vh) rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.sticker {
+  width: 150px;
+  position: relative;
+  opacity: 0;
+  transform: scale(0.5) rotate(-20deg);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+/* Add this class via JS to make them pop */
+.sticker.pop {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+#vHint {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: #ff4081;
+  font-weight: bold;
+  pointer-events: none;
+  opacity: 0.8;
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  0% { transform: translateX(-50%) translateY(0); }
+  100% { transform: translateX(-50%) translateY(-10px); }
+}
+@keyframes wobble {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(-15deg); }
+  30% { transform: rotate(10deg); }
+  45% { transform: rotate(-10deg); }
+  60% { transform: rotate(6deg); }
+  75% { transform: rotate(-4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.sticker-wobble {
+  animation: wobble 0.6s ease;
+}
+@keyframes sticker-pop {
+  0% { transform: scale(1) rotate(0deg); }
+  20% { transform: scale(1.2) rotate(-15deg); }
+  40% { transform: scale(0.9) rotate(10deg); }
+  60% { transform: scale(1.1) rotate(-10deg); }
+  80% { transform: scale(1.05) rotate(6deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.sticker-pop {
+  animation: sticker-pop 0.6s ease;
+}
+.sticker-label {
+  position: fixed;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff69b4; /* pink, you can change */
+  pointer-events: none;
+  z-index: 9999;
+  left: 0; /* we’ll override in JS */
+  top: 0;  /* we’ll override in JS */
+  transition: transform 0.3s ease;
+}
+
+
+#warnBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: 'Nunito', sans-serif;
+
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+
+  color: #ff8fab;
+  border: 1px solid rgba(255, 182, 193, 0.6);
+  border-radius: 20px;
+
+  cursor: pointer;
+  opacity: 0.8;
+
+  max-width: 110px;
+  text-align: center;
+  line-height: 1.2;
+
+  transition: all 0.25s ease;
+  
+}
+
+#warnBtn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 5px 15px rgba(255, 182, 193, 0.4);
+  opacity: 1;
+}
+#vStickerHint {
+  position: absolute;
+  top: -25px; /* above the sticker */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  font-family: 'Patrick Hand', cursive;
+  font-size: 14px;
+  color: #ff69b4;
+  font-weight: bold;
+
+  pointer-events: none;
+  opacity: 0.85;
+
+  animation: bounce 1s infinite alternate;
+  text-shadow: 1px 1px 2px #fff;
+  z-index: 10;
+}
+.sticker-container {
+  position: relative; /* container is now the reference point */
+  display: inline-block;
+}
+.vStickerHint {
+  position: absolute;
+  top: 50%;
+  left: 105%;
+  transform: translateY(-50%) translateX(-10px); /* start slightly left */
+  opacity: 0;                                     /* hidden initially */
+  
+  font-family: 'Patrick Hand', cursive;
+  font-size: 14px;
+  color: #ff69b4;
+  font-weight: bold;
+
+  pointer-events: none;
+  transition: opacity 1s ease, transform 1s ease; /* smooth fade + slide */
+  z-index: 10;
+}
+
+/* pulse effect */
+@keyframes pulse {
+  0%, 100% { transform: translateY(-50%) translateX(0) scale(1); }
+  50% { transform: translateY(-50%) translateX(0) scale(1.1); }
+}
+
+.vStickerHint.pulse {
+  animation: pulse 1s ease-in-out infinite;
+}
+.stickerText {
+  position: absolute;
+  top: 50%;
+  left: 105%; /* right side of sticker */
+  transform: translateY(-50%) translateX(-10px);
+  opacity: 0;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ff4081; /* default, can override per sticker */
+  pointer-events: none;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  z-index: 10;
+}
